@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "agp-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "App de configuracion y visualizacion de AGP-NODO",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/leobracco/AGP-VR-APP",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +14,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Leonardo Bracco",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^23.2.1"
