@@ -1,0 +1,1 @@
+{"type":"MotorConfig","nombre":"config/MotorConfig-1.json","ControlType":"2","TotalPulses":"","RateSetting":"0","MeterCal":"0","ManualAdjust":"0","KP":"0.1","KI":"0.2","KD":"0.0","MinPWM":"10","MaxPWM":"200","Deadband":"0","BrakePoint":"0","UseMultiPulses":"false"}
