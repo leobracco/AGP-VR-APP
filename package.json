@@ -8,15 +8,13 @@
   },
   "repository": "https://github.com/leobracco/AGP-VR-APP",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "AGP",
+    "AOG",
+    "AGP-VR",
+    "AGP-NODO"
   ],
   "author": "Leonardo Bracco",
-  "license": "CC0-1.0",
-  "devDependencies": {
+    "devDependencies": {
     "electron": "^23.2.1"
   },
   "dependencies": {
