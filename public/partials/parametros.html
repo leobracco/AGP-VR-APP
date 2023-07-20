@@ -1,0 +1,162 @@
+<script src="./js/plotly-latest.min.js"></script>
+<div id="content">
+ 
+<input type="hidden" id="file" value="MotorConfig" />
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-12">
+              <div id="formulario">
+                  <div class="equipos">
+                      <h1 class="h3 mb-2 text-gray-800">Parámetros del Motor/Test</h1>
+
+                      <div class="variables">
+                        <div class="card mb-4 py-3 border-left-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    
+                                      <tr class="tabledata">
+                                        <td class="titulo_celda" align="right" width="1%" nowrap>Secciones</td>
+                                        <td class="form" >
+                                        <div id="SeccionesLive"></div>
+                                        </td>
+                                      </tr>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4 py-3 border-left-primary">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h7><div id="DosisLive"></div></h7>
+                                       
+                                    </div>
+                                    <div class="col-md-2">
+                                      <h7><div id="RPMLive"></div></h7>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <h7><div id="PWMMotor"></div></h7>
+                                    </div>
+                                   
+                                    <div class="col-md-2">
+                                      
+                                      <h7><div id="SpeedLive"></div></h7>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+
+                            <select class="nav-link" id="Motor-select-Param" role="tab" aria-controls="Motor-select-Param" aria-selected="false">
+                              <option value="0">Seleccionar Motor</option>
+                            </select>
+                            
+                          
+                            
+                            
+                              <li class="nav-item" role="presentation">
+                                  <button class="nav-link active" id="Motor-tab" data-bs-toggle="tab" data-bs-target="#Motor" type="button" role="tab" aria-controls="Motor" aria-selected="false">Pwm</button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="Calibracion-tab" data-bs-toggle="tab" data-bs-target="#Calibracion" type="button" role="tab" aria-controls="Calibracion" aria-selected="false">Calibración</button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="Grafico-tab" data-bs-toggle="tab" data-bs-target="#grafico" type="button" role="tab" aria-controls="grafico" aria-selected="false">Gráfico PID</button>
+                              </li>
+                          </ul>
+                          <div class="tab-content" id="Motor">
+                              <div class="tab-pane fade show active" id="Motor" role="tabpanel" aria-labelledby="Motor-tab">
+                                <div class="card mb-4 py-3 border-left-primary">
+                                  <!-- Contenido del panel Motor -->
+                                  <div class="small mb-1">PWM Minimo</div>
+                                  <div class="card-body">
+                                      <input type="number" id="MinPWM" class="form-control form-control-user"  min="0" max="255" />
+                                  </div>
+                                  <div class="small mb-1">PWM Maximo</div>
+                                  <div class="card-body">
+                                      <input type="number" id="MaxPWM" class="form-control form-control-user"  min="0" max="255" />
+                                  </div>
+                                  <div class="small mb-1">Dir Pin</div>
+                                  <div class="card-body">
+                                      <input type="number" id="DirPin" class="form-control form-control-user"  min="0" max="40" />
+                                  </div>
+                                  <div class="small mb-1">PWM Pin</div>
+                                  <div class="card-body">
+                                      <input type="number" id="PWMPin" class="form-control form-control-user" min="0" max="40" />
+                                  </div>
+                                  </div>  
+                                  <button id="ParametrosMotor" tab="ParametrosMotor" type="button" class="btn btn-success btn-round">Grabar</button>
+                              </div>
+                          </div>
+                          <div class="tab-content" id="Calibracion">
+                              <div class="tab-pane fade show active" id="Calibracion" role="tabpanel" aria-labelledby="Calibracion-tab">
+                                <div class="card mb-4 py-3 border-left-primary">
+                                  <!-- Contenido del panel Calibración -->
+                                  <div class="small mb-1">KP</div>
+                                  <div class="card-body">
+                                      <input type="number" id="KP" class="form-control form-control-user" min="0" max="2" step="0.000001" />
+                                      
+                                  </div>
+                                  <div class="small mb-1">KI</div>
+                                  <div class="card-body">
+                                    <input type="number" id="KI" class="form-control form-control-user" min="0" max="2" step="0.000001" />
+                                    
+                                  </div>
+                                  <div class="small mb-1">KD</div>
+                                  <div class="card-body">
+                                    <input type="number" id="KD" class="form-control form-control-user" min="0" max="50" step="0.000001" />
+                                    
+                                  </div>
+                                  <div class="small mb-1">Deadband</div>
+                                  <div class="card-body">
+                                    <input type="number" id="Deadband" class="form-control form-control-user" min="0" max="10" step="0.1" />
+                                    
+                                  </div>
+                                  
+                                 
+                                
+                                  <div class="small mb-1">Sensor Pin</div>
+                                  <div class="card-body">
+                                    <input type="number" id="FlowPin" class="form-control form-control-user" min="0" max="40"  />
+                                    
+                                  </div>
+                                  <button id="PidConfig" tab="PidConfig"  type="button" class="btn btn-success btn-round">Grabar</button>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="tab-content" id="Grafico">
+                              <div class="tab-pane fade show active" id="Grafico" role="tabpanel" aria-labelledby="Grafico-tab">
+                                  <!-- Contenido del panel Gráfico PID -->
+                                  <div class="card mb-4 py-3 border-left-primary">
+                                      <div class="card-body">
+                                          <div class="strong mb-1"><b>Grafico PID</b></div>
+                                          <div class="chart-area">
+                                              <div class="h-full">
+                                                  <div class="chartjs-size-monitor">
+                                                      <div class="chartjs-size-monitor-expand">
+                                                          <div></div>
+                                                      </div>
+                                                      <div class="chartjs-size-monitor-shrink">
+                                                          <div></div>
+                                                      </div>
+                                                  </div>
+                                                  <div id="grafico"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+ 
+  <script src="./js/mqtt-parametros.js"></script>
+  <script src="./js/render-parametros.js"></script>
+</div>

@@ -1,0 +1,205 @@
+<!--"Auto": true ,
+  "ManualPWM": 0 ,
+  "SetPoint":0 ,
+  "MinimumDose":2 , 
+  "DosePerUnit":0.03333333333,
+  -->
+<style>
+  .button-container {
+  display: flex;
+  gap: 10px; /* Ajusta el espacio entre los botones según tus necesidades */
+  margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+}
+
+.button-container button {
+  flex: 1;
+}
+
+  .sample-inline {
+    display: inline;
+
+  }
+
+  .input-with-bar {
+    position: relative;
+  }
+
+  .bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    transform: translateY(-50%);
+  }
+
+  .input-with-fraction {
+    display: flex;
+    align-items: center;
+  }
+
+  .fraction-symbol {
+    margin: 0 5px;
+  }
+  .small-input {
+  width: 65px; /* Ajusta el ancho según tus necesidades */
+  font-size: 12px; /* Ajusta el tamaño de fuente según tus necesidades */
+}
+</style>
+<div id="content">
+
+  <input type="hidden" id="file" value="CalConfig" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="formulario">
+          <div class="equipos">
+            <h1 class="h3 mb-2 text-gray-800">Calibracion de Dosis</h1>
+
+            <div class="variables">
+
+
+              <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+
+                <select class="nav-link" id="Motor-select-Cal" role="tab" aria-controls="Motor-select-Cal"
+                  aria-selected="false">
+                  <option value="0">Seleccionar Motor</option>
+                </select>
+
+                
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="Cuerpo-tab" data-bs-toggle="tab" data-bs-target="#Cuerpo"
+                    type="button" role="tab" aria-controls="Motor" aria-selected="false">Cuerpo/Motor</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="TipoDeDosis-tab" data-bs-toggle="tab" data-bs-target="#TipoDeDosis"
+                    type="button" role="tab" aria-controls="TipoDeDosis" aria-selected="false">Calibración</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="CalDeDosis-tab" data-bs-toggle="tab" data-bs-target="#CalDeDosis"
+                    type="button" role="tab" aria-controls="CalDeDosis" aria-selected="false">Calibracion de Dosis</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="Cuerpo">
+                <div class="tab-pane fade show active" id="Cuerpo" role="tabpanel" aria-labelledby="Cuerpo-tab">
+                  <div class="card mb-4 py-3 border-left-primary">
+                    <div class="small mb-1">Auto/Manual</div>
+                    <div class="card-body">
+                      <select class="nav-link" id="Auto" role="tab">
+                        <option value="Auto">Auto</option>
+                        <option value="Manual">Manual</option>
+                      </select>
+                    </div>
+                    <div class="small mb-1">Velocidad Manual</div>
+                    <div class="card-body">
+                      <input type="number" id="ManualPWM" class="form-control form-control-user" min="0" max="255" />
+                    </div>
+                    <div class="small mb-1">Ancho de Labor en Metros</div>
+                    <div class="card-body">
+                      <input type="number" id="Working_Width" class="form-control form-control-user" min="0"
+                        max="255" />
+                    </div>
+                    <div class="small mb-1">Pulsos por vuelta</div>
+                    <div class="card-body">
+                      <input type="number" id="PulsePerRev" class="form-control form-control-user" min="0" max="255" />
+                    </div>
+                    <div class="small mb-1">Agujeros por placa</div>
+                    <div class="card-body">
+                      <input type="number" id="HolesPerPlate" class="form-control form-control-user" min="0" max="40" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" id="TipoDeDosis">
+                <div class="tab-pane fade show active" id="TipoDeDosis" role="tabpanel"
+                  aria-labelledby="TipoDeDosis-tab">
+                  <div class="card mb-4 py-3 border-left-primary">
+                    <div class="small mb-1">Tipo de Dosificacion</div>
+                    <div class="card-body">
+                      <select class="nav-link" id="DosePer">
+                        <option value="SeedsPerMeter">Semillas Por Metro</option>
+                        <option value="SeedsPerHectare">Semillas Por Hectarea</option>
+                        <option value="KilosPerHectare">Kilos Por Hectarea</option>
+                        <option value="LitersPerHectare">Litros Por Hectarea</option>
+                      </select>
+                    </div>
+                    <div class="small mb-1">Semillas Por Metro</div>
+                    <div class="card-body">
+                      <input type="number" id="SeedsPerMeter" class="form-control form-control-user" min="0" max="100" step="0.1" />
+                    </div>
+                    <div class="small mb-1">Semillas Por Hectarea</div>
+                    <div class="card-body">
+                      <input type="number" id="SeedsPerHectare" class="form-control form-control-user" min="0" max="100" step="0.1" />
+                    </div>
+                    <div class="small mb-1">Kilos Por Hectarea</div>
+                    <div class="card-body">
+                      <input type="number" id="KilosPerHectare" class="form-control form-control-user" min="0" max="1000" step="0.1" />
+
+                    </div>
+                    <div class="small mb-1">Litros Por Hectarea</div>
+                    <div class="card-body">
+                      <input type="number" id="LitersPerHectare" class="form-control form-control-user" min="0" max="1000" step="0.1" />
+
+                    </div>
+                    <button id="CalConfig" tab="CalConfig" type="button"
+                      class="btn btn-success btn-round">Grabar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-content" id="CalDeDosis">
+                <div class="tab-pane fade show active" id="CalDeDosis" role="tabpanel" aria-labelledby="CalDeDosis-tab">
+                  <div class="card mb-4 py-3 border-left-primary">
+                    <div class="small mb-1" id="MinimumDoseText">Dosis minima</div>
+                    <div class="card-body">
+                      <input type="number" id="MinimumDose" class="form-control form-control-user" min="0" max="100" step="0.1" />
+                    </div>
+                    <div class="small mb-2">PWM Motor</div>
+                    <div class="card-body">
+                      <input type="number" id="PWMMotor" class="form-control form-control-user" min="0" max="255" step="1"/>
+                    </div>
+                    <div class="small mb-2">Dosis por Pulso</div>
+                    <div class="card-body">
+                      <input type="number" id="DosePerUnit" class="form-control form-control-user" readonly />
+                    </div>
+                    <div class="small mb-2">Una semilla cada/Pulsos</div>
+                    <div class="card-body">
+                      <input type="number" id="SeedByPulses" class="form-control form-control-user" readonly />
+                    </div>
+                    <div class="small mb-1">Pulsos</div>
+                    <div class="card-body">
+                      <input type="number" id="TotalPulses" class="form-control form-control-user" readonly />
+                    </div>
+                    <div class="small mb-1">Vueltas</div>
+                    <div class="card-body">
+                      <div class="input-with-fraction">
+                        <input type="number" id="Turns" class="form-control form-control-user small-input" readonly />
+                        <span class="fraction-symbol">⁄</span>
+                        <input type="number" id="MaxTurns" class="form-control form-control-user small-input" value="20" />
+                      </div>
+                    </div>
+                    <div class="small mb-1">Muetra en <div id="Sample" class="sample-inline"></div>
+                    </div>
+                    <div class="card-body">
+                      <input type="number" id="SampleCollected" class="form-control form-control-user" />
+                    </div>
+                    <div class="button-container">
+                      <button id="Run" type="button" class="btn btn-secondary btn-round btn-sm">Empezar</button>
+                      <button id="Save" type="button" class="btn btn-success btn-round btn-sm">Grabar</button>
+                      <button id="Stop" type="button" class="btn btn-warning btn-round btn-sm">Parar</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/plotly-latest.min.js"></script>
+  <script src="./js/mqtt-calibracion.js"></script>
+  <script src="./js/render-calibracion.js"></script>
+</div>

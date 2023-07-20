@@ -1,0 +1,19 @@
+.rectangulo-rojo {
+    width: 11.1px;
+    height: 25px;
+    background-color: red;
+    display: inline-block;
+}
+
+.rectangulo-verde {
+    width: 11.1px;
+    height: 25px;
+    background-color: green;
+    display: inline-block;
+}
+
+.spacer {
+    width: 1px;
+    background-color: grey;
+    display: inline-block;
+}

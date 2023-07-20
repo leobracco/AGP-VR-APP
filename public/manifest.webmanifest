@@ -1,9 +1,9 @@
 {
-    "name": "Quodii SAS - Cemento Avellaneda",
-    "short_name": "Qii - CA",
-    "description": "Colector de datos off-line con sincronismo automatico",
+    "name": "Agro Parallel - Dosis Variable",
+    "short_name": "AGP-VR",
+    "description": "Dosis variable para sembradoras, fertilizadoras y pulverizsadoras.",
     "icons": [{
-        "src": "../img/qii.jpeg",
+        "src": "../img/logo.jpeg",
         "sizes": "512x512",
         "type": "image/jpeg"
     }],

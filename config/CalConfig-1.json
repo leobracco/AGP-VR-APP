@@ -1,1 +1,17 @@
-{"type":"CalConfig","nombre":"config/CalConfig-1.json","pulsos_cal":"","pwm_manual":"125","calibrar_muestra":"40","dosis_pulso":"","ancho_labor":"8"}
+{
+  "type": "CalConfig",
+  "nombre":"config/CalConfig-1.json",
+  "Auto": "Auto" ,
+  "ManualPWM": 0 ,
+  "SetPoint":0 ,
+  "MinimumDose":2 ,
+  "Working_Width":0.7,
+  "PulsePerRev":600,
+  "HolesPerPlate":20,
+  "DosePerUnit":0.03333333333,
+  "SeedsPerMeter":4,
+  "SeedsPerHectare":0,
+  "KilosPerHectare":0,
+  "LitersPerHectare":0,
+  "DosePer":"SeedsPerMeter"
+}

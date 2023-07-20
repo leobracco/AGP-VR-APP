@@ -1,43 +1,3 @@
-const url = 'ws://192.168.1.17:3000/'
-const clientId = 'AGP-VR_' + Math.random().toString(16).substr(2, 8)
-const options = {
-
-    clean: true,
-    connectTimeout: 4000,
-    clientId: clientId
-}
-const client = mqtt.connect(url, options)
-client.on('connect', function() {
-    console.log('Connected')
-    client.subscribe('/master/estado/motor/#')
-
-})
-
-client.on('message', function(topic, message) {
-  console.log('Received message:', message.toString())
-    var datosMQTT = JSON.parse(message);
-    if(hasElapsedOneSecond())
-    {
-      if( $("#idmotor").val()==datosMQTT.idmotor)
-      {
-        if ($("#autocal").val()==1)
-        {
-            $("#KP").val(datosMQTT.KP);
-            $("#KI").val(datosMQTT.KI);
-            $("#KD").val(datosMQTT.KD);
-        }
-        var kgha=parseFloat(datosMQTT.DOSIS_POR_HA)*parseFloat(datosMQTT.input)/parseFloat(datosMQTT.SetPoint);
-        $("#dosis").html(kgha.toFixed(2)+"Kg de "+datosMQTT.DOSIS_POR_HA+"Kg");
-    
-        actualizarGrafico(message.toString());
-      }
-    }
-
-})
-client.on('error', function(error) {
-  console.error('Error:', error)
-})
-let startTime = Date.now();
 
 function hasElapsedOneSecond() {
     let currentTime = Date.now();
@@ -51,7 +11,7 @@ function hasElapsedOneSecond() {
     }
 }
 
-$("#Prueba").click(function() {
+$("#idmotorParametros").click(function() {
     // Envío del mensaje
     console.log("Prueba");
     const estadoMotor = {
@@ -96,33 +56,7 @@ $("#calibrar_muestra").change(function() {
 });
 
 
-  // Configurar el gráfico
-// Selecciona el contenedor HTML para el gráfico
-var grafico = document.getElementById('grafico');
-
-// Define los datos iniciales para el gráfico
-var datos = [{
-    x: [],
-    y: [],
-    type: 'scatter',
-    mode: 'lines',
-    name: 'Setpoint'
-}, {
-    x: [],
-    y: [],
-    type: 'scatter',
-    mode: 'lines',
-    name: 'Input'
-}];
-
-// Define las opciones para el gráfico
-var opciones = {
-    margin: { t: 0 },
-    legend: { orientation: 'h' }
-};
-
-// Crea el gráfico utilizando Plotly.js
-Plotly.newPlot(grafico, datos, opciones);
+ 
 
 // Función para procesar los datos MQTT recibidos y actualizar el gráfico
 function actualizarGrafico(mensaje) {
@@ -131,5 +65,7 @@ function actualizarGrafico(mensaje) {
 
     // Agrega los nuevos datos al gráfico
     Plotly.extendTraces(grafico, { x: [[new Date()]], y: [[datosMQTT.SetPoint]] }, [0]);
-    Plotly.extendTraces(grafico, { x: [[new Date()]], y: [[datosMQTT.input]] }, [1]);
+    Plotly.extendTraces(grafico, { x: [[new Date()]], y: [[datosMQTT.RPM]] }, [1]);
+    //Plotly.extendTraces(grafico, { x: [[new Date()]], y: [[datosMQTT.PWM]] }, [2]);
 }
+

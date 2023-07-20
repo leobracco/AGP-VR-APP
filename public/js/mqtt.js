@@ -8,7 +8,7 @@ const options = {
 const client = mqtt.connect(url, options)
 client.on('connect', function () {
     console.log('Connected')
-    client.subscribe('/master/estado/motor/#')
+    client.subscribe('/AGP-APP/#')
 
 })
 

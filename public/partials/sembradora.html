@@ -1,0 +1,121 @@
+
+
+<style>
+  /* Estilos para el modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* Estilos adicionales */
+  input[type="text"] {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+<div id="content">
+
+  <input type="hidden" id="file" value="Sembradora" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="formulario">
+          <div class="equipos">
+            <h1 class="h3 mb-2 text-gray-800">Configuracion de sembradora</h1>
+
+            <div class="variables">
+
+
+            
+          
+                     
+                 
+              
+              <div class="tab-content" id="Cuerpo">
+                <div class="tab-pane fade show active" id="Cuerpo" role="tabpanel" aria-labelledby="Cuerpo-tab">
+                  <div class="card mb-4 py-3 border-left-primary">
+                    <div class="small mb-1">Perfil de Sembradora</div>
+                    <div class="card-body">
+                     
+                   
+                      <label class="field">
+                        <select name="SeederName" id="SeederName" class="form-control form-control-user" multiple></select>
+                      </label>
+                        
+                      
+                    </div>
+                    <div class="small mb-1">Nombre</div>
+                    <div class="card-body">
+                      <input type="text" id="SeederNamePrev" class="form-control form-control-user"/>
+                    </div>
+                    <div class="small mb-1">Ancho de Labor en Metros</div>
+                    <div class="card-body">
+                      <input type="number" id="Working_Width" class="form-control form-control-user" min="0"
+                        max="255" />
+                    </div>
+                    <div class="small mb-1">Cantidad de surcos</div>
+                    <div class="card-body">
+                      <input type="number" id="Rows" class="form-control form-control-user" min="0" max="255" />
+                    </div>
+                    <div class="small mb-1">Espacio entre surcos en mts</div>
+                    <div class="card-body">
+                      <input type="number" id="RowSpacing" class="form-control form-control-user" min="0" max="40" />
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+             
+             
+              <div class="button-container">
+                <button id="Save" type="button" class="btn btn-success btn-round btn-sm">Grabar</button>
+                <button id="Clone" type="button" class="btn btn-secondary btn-round btn-sm">Duplicar</button>
+                <button id="Delete" type="button" class="btn btn-warning btn-round btn-sm">Borrar</button>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="CloneModal" class="modal" >
+    <div class="modal-content">
+      <h2>Ingrese un nombre</h2>
+      <input type="text" id="SeederNameClone" placeholder="Ingrese un nombre">
+      <button id="CloneSave" type="button">Grabar</button>
+    </div>
+  </div>
+  <script src="./js/plotly-latest.min.js"></script>
+  <script src="./js/mqtt-sembradora.js"></script>
+  <script src="./js/render-sembradora.js"></script>
+</div>

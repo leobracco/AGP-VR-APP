@@ -126,31 +126,32 @@
                         </div>
                       </div>
                       <div class="card mb-4 py-3 border-left-primary">
-                        <div class="small mb-1">PWM para girar</div>
+
+                        <div class="small mb-1">Rate Settings</div>
                         <div class="card-body">
-                          <input type="number" id="calibrar_pwm" class="form-control form-control-user" min="0" max="255"/>
+                          <input type="number" id="RateSetting" class="form-control form-control-user" />
                         </div>
-                        <div class="small mb-1">Giros del motor</div>
+                        <div class="small mb-1">Pulsos Totales</div>
                         <div class="card-body">
-                          <input type="number" id="calibrar_giros" class="form-control form-control-user"   value="10"/>
+                          <input type="number" id="TotalPulses" class="form-control form-control-user"   />
                           
                         </div>
-                        <div class="small mb-1">Pulsos</div>
+                        <div class="small mb-1">Medicio de la calibracion</div>
                         <div class="card-body">
-                          <input type="number" id="pulsos_cal" class="form-control form-control-user"   readonly/>
+                          <input type="number" id="MeterCal" class="form-control form-control-user"   readonly/>
                           
                         </div>
-                        <div class="small mb-1">Ingresar muestra en Kg</div>
+                        <div class="small mb-1">Dosis Manual</div>
                         <div class="card-body">
-                          <input type="number" id="calibrar_muestra"class="form-control form-control-user" value="0" min="0" max="1000" step=".001"/>
+                          <input type="number" id="ManualAdjust"class="form-control form-control-user" />
                         </div>
-                        <div class="small mb-1">Dosis por pulso</div>
+                        <div class="small mb-1">UPD</div>
                         <div class="card-body">
-                          <input type="number" id="dosis_pulso"class="form-control form-control-user" readonly/>
+                          <input type="number" id="UPM"class="form-control form-control-user" readonly/>
                         </div>
                         <div class="small mb-1">Ancho Labor</div>
                         <div class="card-body">
-                          <input type="number" id="ancho_labor"class="form-control form-control-user" />
+                          <input type="number" id="Working_Width"class="form-control form-control-user" />
                         </div>
                         <div class="row">
                           <div class="update ml-auto mr-auto">
