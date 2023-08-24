@@ -9775,8 +9775,8 @@ a:focus {
 .container-md,
 .container-lg,
 .container-xl {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .scroll-to-top {
@@ -9864,7 +9864,7 @@ a:focus {
 
 .bg-gradient-primary {
   background-color: #89db62;
-  background-image: linear-gradient(180deg, #89db62 10%, #224abe 100%);
+  background-image: linear-gradient(180deg, #89db62 10%, #1a4417 100%);
   background-size: cover;
 }
 
@@ -10472,7 +10472,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 14rem !important;
+    width: 9rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;
@@ -10498,7 +10498,7 @@ a:focus {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 1rem;
+    padding: 0;
     width: 14rem;
   }
   .sidebar .nav-item .nav-link i {

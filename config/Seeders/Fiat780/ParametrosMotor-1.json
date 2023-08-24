@@ -1,0 +1,1 @@
+{"type":"ParametrosMotor","nombre":"config/Seeders/Fiat780/ParametrosMotor-1.json","MinPWM":"15","MaxPWM":"200","DirPin":"5","PWMPin":"18"}

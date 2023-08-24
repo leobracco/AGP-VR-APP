@@ -1,12 +1,12 @@
 .rectangulo-rojo {
-    width: 11.1px;
+    width: 80px;
     height: 25px;
     background-color: red;
     display: inline-block;
 }
 
 .rectangulo-verde {
-    width: 11.1px;
+    width: 80px;
     height: 25px;
     background-color: green;
     display: inline-block;
@@ -16,4 +16,59 @@
     width: 1px;
     background-color: grey;
     display: inline-block;
+}
+.tubo-rojo {
+    width: 80px;
+    height: 25px;
+    background-color: red;
+    display: inline-block;
+    border-radius: 5.55px; /* Mitad del valor de la anchura para hacerlo circular */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto pase a la siguiente línea */
+    overflow: hidden; /* Esconde el texto que se sale del div */
+    color: rgb(255, 255, 255); /* Cambia el color del texto */
+    font-size: 12px; /* O cualquier otro tamaño */
+    
+    align-items: center; /* Puede ser 'flex-start', 'flex-end' también */
+   
+  
+}
+
+.tubo-verde {
+    width: 80px;
+    height: 25px;
+    background-color: green;
+    
+    display: inline-block;
+    border-radius: 5.55px; /* Mitad del valor de la anchura para hacerlo circular */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto pase a la siguiente línea */
+    overflow: hidden; /* Esconde el texto que se sale del div */
+    color: rgb(255, 255, 255); /* Cambia el color del texto */
+    font-size: 12px; /* O cualquier otro tamaño */
+  
+    align-items: center; /* Puede ser 'flex-start', 'flex-end' también */
+ 
+    
+
+    
+}
+
+.tubo-status {
+    width: 80px;
+    height: 25px;
+    background-color: rgb(66, 71, 66);
+    display: inline-block;
+    border-radius: 5.55px; /* Mitad del valor de la anchura para hacerlo circular */
+    text-align: center;
+}
+.SeccionesView {
+    position: relative;  /* Establece un contexto de posición */
+    
+    border: 1px solid black; /* Bordes solo para visualización */
+}
+#changeSize {
+    position: absolute;  /* Hace que el ícono sea posicionado en base a su contenedor más cercano con posición relativa/absoluta */
+    top: -10px;           /* Posición desde la parte superior del contenedor */
+    right: 10px;         /* Posición desde la parte derecha del contenedor */
 }

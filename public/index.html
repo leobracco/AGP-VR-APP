@@ -20,22 +20,24 @@
   <link rel="apple-touch-icon" href="/img/qii.jpeg" />
 
   <meta name="theme-color" content="#764ABC" />
+  
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" defer />
 
   <link href="css/bstreeview.css" rel="stylesheet" />
   <link href="css/agp-style.css" rel="stylesheet" />
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet" defer />
+  <link href="css/sb-admin-2.css" rel="stylesheet" defer />
   <link href="css/mmenu.css" rel="stylesheet" />
   <!-- Bootstrap core JavaScript-->
-  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery-3.7.0.min.js"></script>
   <!--script src="vendor/jquery/jquery.min.js"></script-->
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Include jQuery and the jQuery.mmenu .js files -->
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js" async="async"></script>
+  
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
   
@@ -46,10 +48,16 @@
   <script src="js/render.js"></script>
   <script src="js/route.js"></script>
   <script src="./js/mqtt-index.js"></script>
+ <style>
+  body {
+  overflow: hidden;
+}
+ </style>
 </head>
 
 <body id="page-top">
   <input type="hidden" id="SeederNameConfig"  />
+  <input type="hidden" id="SeederNameNoSpacesConfig"  />
   <input type="hidden" id="Working_WidthConfig"  />
   <input type="hidden" id="RowsConfig"  value="0"/>
   <input type="hidden" id="RowSpacingConfig"  />
@@ -60,18 +68,19 @@
 
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;">
         <div class="sidebar-brand-text mx-3">Agro <sup>Parallel</sup></div>
-      
+      </a>
 
       <!-- Divider -->
+      
       <hr class="sidebar-divider my-0" />
-
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href="javascript:;" onclick="Get('home')">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dosificacion</span>
+          <span>Live</span>
         </a>
       </li>
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider" />
@@ -91,21 +100,26 @@
           <div id="collapseID_SECCION" class="collapse" aria-labelledby="headingID_SECCION"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Ajuestes</h6>
-              <a class="collapse-item" href="javascript:;" onclick="Get('calibracion')">Calibracion de Dosis</a>
+              <h6 class="collapse-header">Calibracion</h6>
+              <a class="collapse-item" href="javascript:;" onclick="Get('calibracion')">Dosis</a>
               <a class="collapse-item" href="javascript:;" onclick="Get('parametros')">Motores</a>
               <a class="collapse-item" href="javascript:;" onclick="Get('sembradora')">Sembradora</a>
-              <a class="collapse-item" href="wifi.html">Calibracion Motor</a>
-              <a class="collapse-item" href="javascript:;" onclick="Get('wifi')">Wifi</a>
-              <a class="collapse-item" href="javascript:;" onclick="Get('mqtt')">Mqtt</a>
-              <a class="collapse-item" href="javascript:;" onclick="Get('nodo')">Nodo</a>
+             
             </div>
           </div>
         </li>
       </div>
+      <hr class="sidebar-divider my-0" />
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="javascript:;" id="botonMover">
+          <i class="fa-solid fa-up-down-left-right"></i>
+          <span>Mover ventana</span>
+        </a>
+      </li>
     </ul>
     <!-- End of Sidebar -->
-
+   
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column"></div>
     <!-- End of Content Wrapper -->

@@ -1,121 +1,88 @@
+
 const {
   contextBridge,
   ipcRenderer
-} = require('electron')
+} = require('electron');
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  setTitle: (title) => ipcRenderer.send('set-title', title),
-  grabarConfig: (json) => ipcRenderer.send('grabar-config', json),
-  leerConfig: (file) => ipcRenderer.send('loadJsonData', file),
-  readListSeeders: (json) => ipcRenderer.send('ListSeeders', json)
-})
-
-function readListSeeders(callback) {
-  ipcRenderer.on('fileList', (event, jsonData) => {
-
-    callback(jsonData);
-  });
-}
-
-function leerConfigLoad(callback) {
-  ipcRenderer.on('jsonDataLoaded', (event, jsonData) => {
-
-    callback(jsonData);
-  });
-}
-readListSeeders((jsonData) => {
-
-  //var select = $('<select name="SeederName" id="SeederName" class="form-control form-control-user" multiple></select>');
-  var select = document.getElementById("SeederName");
-
-  var seeders = JSON.parse(jsonData);
-
-
-  for (let x in seeders) {
-
-
-    var opt = document.createElement('option');
-    opt.value = seeders[x].Name;
-    opt.innerHTML = seeders[x].Name;
-    select.append(opt);
+// Exponer funciones al proceso de renderizado
+contextBridge.exposeInMainWorld(
+  'electronAPI', {
+    moveWindow: (x, y) => {
+      ipcRenderer.send('move-window', x, y);
+    },
+    setTitle: title => {
+      ipcRenderer.send('set-title', title);
+    },
+    grabarConfig: json => {
+      ipcRenderer.send('grabar-config', json);
+    },
+    leerConfig: file => {
+      ipcRenderer.send('loadJsonData', file);
+    },
+    readListSeeders: () => {
+      ipcRenderer.send('ListSeeders');
+    },
+    cloneSeeder: json => {
+      ipcRenderer.send('CloneSeeder', json);
+    },
+    loadSeeder: json => {
+      ipcRenderer.send('LoadSeeder', json);
+    },
+    changeSize: json => {
+      ipcRenderer.send('ChangeSize', json);
+    },
+    maximizeWindow: () => {
+      ipcRenderer.send('maximize-window-request');
+    }
   }
-
-}
 );
 
+// Escucha y maneja datos para Seeders
+ipcRenderer.on('fileList', (event, jsonData) => {
+  const select = document.getElementById("SeederNameList");
+  const seeders = JSON.parse(jsonData);
 
+  select.innerHTML = ''; // Limpia el select
 
+  for (let seeder of seeders) {
+    const opt = document.createElement('option');
+    opt.value = seeder.SeederNameNoSpacesConfig;
+    opt.textContent = seeder.SeederName;
+    if (seeder.SeederNameNoSpacesConfig === getValue("SeederNameNoSpacesConfig")) {
+      opt.selected = true;
+    }
+    select.append(opt);
+  }
+});
 
+// Escucha y maneja la configuración cargada
+ipcRenderer.on('jsonDataLoaded', (event, jsonData) => {
+  const datosMQTT = JSON.parse(jsonData);
 
+  const mappings = {
+    ParametrosMotor: ['DirPin', 'PWMPin', 'MinPWM', 'MaxPWM'],
+    CalConfig: ['Auto', 'ManualPWM', 'MinimumDose', 'Working_Width', 'PulsePerRev', 'HolesPerPlate', 'DosePerUnit', 'SeedsPerMeter', 'SeedsPerHectare', 'KilosPerHectare', 'LitersPerHectare', 'DosePer'],
+    PidConfig: ['KP', 'KI', 'KD', 'FlowPin', 'Deadband'],
+    Seeder: ['SeederName', 'Working_Width', 'Rows', 'RowSpacing', 'SeederNamePrev'],
+    SeederConfig: ['SeederNameConfig', 'Working_WidthConfig', 'RowsConfig', 'RowSpacingConfig', 'SeederNameNoSpacesConfig']
+  };
 
-
-// Agrega el elemento select al contenedor
-//$('#selectContainer').append(select);
-
-
-
-
-leerConfigLoad((jsonData, idmotor, fileName) => {
-
-  var datosMQTT = JSON.parse(jsonData);
-
-  switch (datosMQTT.type) {
-    case "ParametrosMotor":
-      actualizarValor('DirPin', 'DirPin', datosMQTT);
-      actualizarValor('PWMPin', 'PWMPin', datosMQTT);
-      actualizarValor('MinPWM', 'MinPWM', datosMQTT);
-      actualizarValor('MaxPWM', 'MaxPWM', datosMQTT);
-      break;
-    case "CalConfig":
-      actualizarValor('Auto', 'Auto', datosMQTT);
-      actualizarValor('ManualPWM', 'ManualPWM', datosMQTT);
-
-      actualizarValor('MinimumDose', 'MinimumDose', datosMQTT);
-      actualizarValor('Working_Width', 'Working_Width', datosMQTT);
-      actualizarValor('PulsePerRev', 'PulsePerRev', datosMQTT);
-      actualizarValor('HolesPerPlate', 'HolesPerPlate', datosMQTT);
-      actualizarValor('DosePerUnit', 'DosePerUnit', datosMQTT);
-      actualizarValor('SeedsPerMeter', 'SeedsPerMeter', datosMQTT);
-      actualizarValor('SeedsPerHectare', 'SeedsPerHectare', datosMQTT);
-      actualizarValor('KilosPerHectare', 'KilosPerHectare', datosMQTT);
-      actualizarValor('LitersPerHectare', 'LitersPerHectare', datosMQTT);
-      actualizarValor('DosePer', 'DosePer', datosMQTT);
-
-      break;
-
-    case "PidConfig":
-      actualizarValor('KP', 'KP', datosMQTT);
-      actualizarValor('KI', 'KI', datosMQTT);
-      actualizarValor('KD', 'KD', datosMQTT);
-      actualizarValor('FlowPin', 'FlowPin', datosMQTT);
-      break;
-    case "Seeder":
-      actualizarValor('SeederName', 'SeederName', datosMQTT);
-      actualizarValor('Working_Width', 'Working_Width', datosMQTT);
-      actualizarValor('Rows', 'Rows', datosMQTT);
-      actualizarValor('RowSpacing', 'RowSpacing', datosMQTT);
-      actualizarValor('SeederNamePrev', 'SeederName', datosMQTT);
-      
-      break;
-
-
-    case "SeederConfig":
-
-
-      actualizarValor('SeederNameConfig', 'SeederName', datosMQTT);
-      actualizarValor('Working_WidthConfig', 'Working_Width', datosMQTT);
-      actualizarValor('RowsConfig', 'Rows', datosMQTT);
-      actualizarValor('RowSpacingConfig', 'RowSpacing', datosMQTT);
-
-      break;
-    default:
-      console.log("Sin opcion");
+  const props = mappings[datosMQTT.type];
+  if (props) {
+    props.forEach(prop => actualizarValor(prop, prop, datosMQTT));
+  } else {
+    console.log("Sin opción");
   }
 });
 
 function actualizarValor(idElemento, propiedad, datos) {
   const input = document.getElementById(idElemento);
-  input.value = datos[propiedad];
-  return true;
+  if (input) {
+    input.value = datos[propiedad];
+  }
+}
 
+function getValue(elementId) {
+  const element = document.getElementById(elementId);
+  return element ? element.value : null;
 }

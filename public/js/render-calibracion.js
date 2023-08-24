@@ -1,4 +1,4 @@
-$("#Motor-select-Cal").on("change", function() {
+$("#Motor-select-Cal").on("change", function () {
     if ($("#Motor-select-Cal").val() != 0) {
 
         nombre = "config/CalConfig-" + $("#Motor-select-Cal").val() + ".json";
@@ -6,24 +6,27 @@ $("#Motor-select-Cal").on("change", function() {
 
     }
 });
-   
 
- 
 
-$(document).ready(function() {
-     // Obtener el elemento select
-     
-     //var s = $("<select id=\"Motor-select-Cal\" name=\"selectName\" />");
-     for (var i = 1; i <= $("#RowsConfig").val(); i++) {
-        $("#Motor-select-Cal").append(new Option("Motor "+ i, i));
-}
 
-   
+
+$(document).ready(function () {
+    // Obtener el elemento select
+
+    //var s = $("<select id=\"Motor-select-Cal\" name=\"selectName\" />");
+    for (var i = 1; i <= $("#RowsConfig").val(); i++) {
+        $("#Motor-select-Cal").append(new Option("Motor " + i, i));
+    }
+
+
     $("#TipoDeDosis").hide();
     $("#Cuerpo").show();
     $("#CalDeDosis").hide();
+    if (sessionStorage.getItem('Page') != "home")
+
+    $('#changeSize').css('display', 'none');
 });
-$('#TipoDeDosis-tab').click(function() {
+$('#TipoDeDosis-tab').click(function () {
 
 
     $(this).addClass("active");
@@ -34,7 +37,7 @@ $('#TipoDeDosis-tab').click(function() {
     $("#TipoDeDosis").show();
     console.log('Se detectó un cambio en el input');
 });
-$('#CalDeDosis-tab').click(function() {
+$('#CalDeDosis-tab').click(function () {
 
 
     $(this).addClass("active");
@@ -51,7 +54,7 @@ $('#CalDeDosis-tab').click(function() {
         $("#MinimumDoseText").html("Dosis Minima en Semillas por metro");
         $("#MinimumDoseText").html("Dosis Minima en Semillas por metro");
         $("#Sample").html("Semillas");
-        
+
     }
 
     if ($("#DosePer").val() == "SeedsPerHectare") {
@@ -70,7 +73,7 @@ $('#CalDeDosis-tab').click(function() {
         $("#Sample").html("Litros");
     }
 });
-$('#Cuerpo-tab').click(function() {
+$('#Cuerpo-tab').click(function () {
 
 
     $(this).addClass("active");
@@ -81,7 +84,7 @@ $('#Cuerpo-tab').click(function() {
     $("#Cuerpo").show();
 
 });
-$("#ParametrosMotor").on("click", function() {
+$("#ParametrosMotor").on("click", function () {
     alert("ParametrosMotor" + $(this).attr("tab"));
 
     const Motor = {
@@ -102,13 +105,14 @@ $("#ParametrosMotor").on("click", function() {
 });
 
 
-$("#PidConfig").on("click", function() {
+$("#PidConfig").on("click", function () {
     console.log("PidConfig:" + $(this).attr("tab"));
 
     // Json a grabar
     const Pid = {
         type: $(this).attr("tab"),
-        nombre: "config/" + $(this).attr("tab") + "-" + $("#Motor-select-Cal").val() + ".json",
+       
+        nombre: "config/Seeders/" + $("#SeederNameNoSpacesConfig").val() + "/PidConfig-" + $("#Motor-select-Cal").val() + ".json",
         KP: $("#KP").val(),
         KI: $("#KI").val(),
         KD: $("#KD").val(),
@@ -125,12 +129,13 @@ $("#PidConfig").on("click", function() {
 
 });
 
-$("#CalConfig").on("click", function() {
+$("#CalConfig").on("click", function () {
 
     // Json a grabar
     const Cal = {
         type: $(this).attr("tab"),
-        nombre: "config/" + $(this).attr("tab") + "-" + $("#Motor-select-Cal").val() + ".json",
+       
+        nombre: "config/Seeders/" + $("#SeederNameNoSpacesConfig").val() + "/CalConfig-" + $("#Motor-select-Cal").val() + ".json",
         Auto: $("#Auto").val(),
         ManualPWM: $("#ManualPWM").val(),
         SetPoint: $("#SetPoint").val(),
@@ -154,14 +159,49 @@ $("#CalConfig").on("click", function() {
 
 
 });
-$("#SampleCollected").on("keyup change", function() {
-    $("#DosePerUnit").val($(this).val() / $("#TotalPulses").val());
-    $("#SeedByPulses").val($("#TotalPulses").val()/$(this).val() );
+$("#CloneCalConfig").on("click", function () {
+
+    for (var i = 1; i <= $("#RowsConfig").val(); i++) {
+        if ($("#Motor-select-Param").val() != i) {
+            const Cal = {
+                type: CalConfig,
+               
+                nombre: "config/Seeders/" + $("#SeederNameNoSpacesConfig").val() + "/CalConfig-" + $("#Motor-select-Param").val() + ".json",
+                Auto: $("#Auto").val(),
+                ManualPWM: $("#ManualPWM").val(),
+                SetPoint: $("#SetPoint").val(),
+                MinimumDose: $("#MinimumDose").val(),
+                Working_Width: $("#Working_Width").val(),
+                PulsePerRev: $("#PulsePerRev").val(),
+                HolesPerPlate: $("#HolesPerPlate").val(),
+                DosePerUnit: $("#DosePerUnit").val(),
+                SeedsPerMeter: $("#SeedsPerMeter").val(),
+                SeedsPerHectare: $("#SeedsPerHectare").val(),
+                KilosPerHectare: $("#KilosPerHectare").val(),
+                LitersPerHectare: $("#LitersPerHectare").val(),
+                DosePer: $("#DosePer").val()
+
+            };
+            jsonData = JSON.stringify(Cal);
+            console.log(jsonData)
+            client.publish('/NODO/MOTOR/' + i + '/CalConfig', jsonData);
+            window.electronAPI.grabarConfig(jsonData);
+        }
+    }
+
+
+
+
 });
 
-$("#Run").click(function() {
-     // Json a grabar
-     const SampleDose = {
+$("#SampleCollected").on("keyup change", function () {
+    $("#DosePerUnit").val($(this).val() / $("#TotalPulses").val());
+    $("#SeedByPulses").val($("#TotalPulses").val() / $(this).val());
+});
+
+$("#Run").click(function () {
+    // Json a grabar
+    const SampleDose = {
         type: "SampleDose",
         DosePer: $("#DosePer").val(),
         MaxTurns: $("#MaxTurns").val(),
@@ -169,6 +209,5 @@ $("#Run").click(function() {
     };
     jsonData = JSON.stringify(SampleDose);
     client.publish('/NODO/MOTOR/' + $("#Motor-select-Cal").val() + '/SampleDose', jsonData);
-  });
+});
 
-  

@@ -70,16 +70,17 @@
                 
                 <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="Cuerpo-tab" data-bs-toggle="tab" data-bs-target="#Cuerpo"
-                    type="button" role="tab" aria-controls="Motor" aria-selected="false">Cuerpo/Motor</button>
+                    type="button" role="tab" aria-controls="Motor" aria-selected="false">Cuerpo</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="TipoDeDosis-tab" data-bs-toggle="tab" data-bs-target="#TipoDeDosis"
-                    type="button" role="tab" aria-controls="TipoDeDosis" aria-selected="false">Calibración</button>
+                    type="button" role="tab" aria-controls="TipoDeDosis" aria-selected="false">Tipo de dosificacion</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="CalDeDosis-tab" data-bs-toggle="tab" data-bs-target="#CalDeDosis"
                     type="button" role="tab" aria-controls="CalDeDosis" aria-selected="false">Calibracion de Dosis</button>
                 </li>
+                
               </ul>
               <div class="tab-content" id="Cuerpo">
                 <div class="tab-pane fade show active" id="Cuerpo" role="tabpanel" aria-labelledby="Cuerpo-tab">
@@ -107,6 +108,10 @@
                     <div class="small mb-1">Agujeros por placa</div>
                     <div class="card-body">
                       <input type="number" id="HolesPerPlate" class="form-control form-control-user" min="0" max="40" />
+                    </div>
+                    <div class="button-container">
+                      <button id="CloneCalConfig" type="button" class="btn btn-success btn-round">Copiar a todos</button>
+                     
                     </div>
                   </div>
                 </div>
